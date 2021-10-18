@@ -10,10 +10,12 @@ import parserapp.Reader;
 
 import parserapp.Constants;
 
+import exceptions.ArquivoNaoEncontradoException;
+
 public class ReaderTest {
 
  	@Test
-	public void testOpenFileSuccess() throws IOException {
+	public void testOpenFileSuccess() throws ArquivoNaoEncontradoException {
 	 	Reader reader = new Reader(Constants.FILE_PATH + "analysisMemory.out");
 		 
 		File f = reader.openFile();
@@ -21,7 +23,7 @@ public class ReaderTest {
 	}
 	
  	@Test
-	public void testOpenFileFail() throws IOException {
+	public void testOpenFileFail() throws ArquivoNaoEncontradoException {
 		
 		try {
 			Reader reader = new Reader(Constants.FILE_PATH + "analysisMemory.out");
@@ -36,7 +38,7 @@ public class ReaderTest {
 	} 
 	
  	@Test
-	public void testMemoryRowSize() throws IOException {
+	public void testMemoryRowSize() throws ArquivoNaoEncontradoException {
 		Reader reader = new Reader(Constants.FILE_PATH + "analysisMemory.out");
 	
 		reader.readFile();
@@ -46,7 +48,7 @@ public class ReaderTest {
 	}
 	
 	@Test
-	public void testMemoryColSize() throws IOException {
+	public void testMemoryColSize() throws ArquivoNaoEncontradoException {
 		Reader reader = new Reader(Constants.FILE_PATH + "analysisMemory.out");
 	
 		reader.readFile();
@@ -56,7 +58,7 @@ public class ReaderTest {
 	}
 	
 	@Test
-	public void testTimeRowSize() throws IOException {
+	public void testTimeRowSize() throws ArquivoNaoEncontradoException {
 		Reader reader = new Reader(Constants.FILE_PATH + "analysisTime.out");
 	
 		reader.readFile();
@@ -66,7 +68,7 @@ public class ReaderTest {
 	}
 	
 	@Test
-	public void testTimeColSize() throws IOException {
+	public void testTimeColSize() throws ArquivoNaoEncontradoException {
 		Reader reader = new Reader(Constants.FILE_PATH + "analysisTime.out");
 	
 		reader.readFile();

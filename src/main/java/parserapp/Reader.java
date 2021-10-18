@@ -3,6 +3,8 @@ package parserapp;
 import java.io.*;
 import java.util.Arrays;
 
+import exceptions.ArquivoNaoEncontradoException;
+
 public class Reader {
 	private String path;
 	private int rowSize;
@@ -12,45 +14,59 @@ public class Reader {
 		this.path = path;
 	}
 
-	public File openFile() throws IOException
+	public File openFile() throws ArquivoNaoEncontradoException
 	{
-		return new File(path);
+		try {
+
+			return new File(path);
+		
+		} catch(Exception e) {
+		
+			throw new ArquivoNaoEncontradoException();
+		
+		}
 	}
 	
-	public String[][] readFile() throws IOException
+	public String[][] readFile() throws ArquivoNaoEncontradoException
 	{
-		 
-		File file = openFile();
-		
-		BufferedReader br = new BufferedReader(new FileReader(file));
-		
-		String[][] values = new String[10000][10000];
+		try {
 
-		for (int i = 0;i < 10000;i++) Arrays.fill(values[i], null);
-		 
-		String st;
+			File file = openFile();
 		
-		int i = -1, rows = 0;
-		int j = 0, cols = 0;
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			
+			String[][] values = new String[10000][10000];
 
-		while ((st = br.readLine()) != null) {
-			if(!st.contains("-")) {
-				values[i][j] = st;
-				j++;
-			} else {
-				rows++;
-				cols = Math.max(cols, j);
-				i++;
-				j = 0;
+			for (int i = 0;i < 10000;i++) Arrays.fill(values[i], null);
+			
+			String st;
+			
+			int i = -1, rows = 0;
+			int j = 0, cols = 0;
+
+			while ((st = br.readLine()) != null) {
+				if(!st.contains("-")) {
+					values[i][j] = st;
+					j++;
+				} else {
+					rows++;
+					cols = Math.max(cols, j);
+					i++;
+					j = 0;
+				}
 			}
-		 }
-		
-		setRowSize(rows);
-		setColSize(cols);
-		
-		br.close();
-		     
-		return values;
+			
+			setRowSize(rows);
+			setColSize(cols);
+			
+			br.close();
+				
+			return values;
+
+		} catch(Exception e) {
+			throw new ArquivoNaoEncontradoException();
+		}
+	
 	 }
 
 
