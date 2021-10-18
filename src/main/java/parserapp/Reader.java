@@ -1,6 +1,7 @@
 package parserapp;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class Reader {
 	private String path;
@@ -16,37 +17,40 @@ public class Reader {
 		return new File(path);
 	}
 	
-	public float[][] readFile() throws IOException
+	public String[][] readFile() throws IOException
 	{
 		 
 		File file = openFile();
 		
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		
-		float[][] values = new float[10000][10000];
+		String[][] values = new String[10000][10000];
+
+		for (int i = 0;i < 10000;i++) Arrays.fill(values[i], null);
 		 
 		String st;
 		
-		 
-		int i = -1;
-		int j = 0;
-		
+		int i = -1, rows = 0;
+		int j = 0, cols = 0;
+
 		while ((st = br.readLine()) != null) {
 			if(!st.contains("-")) {
-				values[i][j] = Float.parseFloat(st);
+				values[i][j] = st;
 				j++;
-			 } else {
-				 i++;
-				 j = 0;
-			 }
+			} else {
+				rows++;
+				cols = Math.max(cols, j);
+				i++;
+				j = 0;
+			}
 		 }
 		
-		 setRowSize(i);
-		 setColSize(j);
+		setRowSize(rows);
+		setColSize(cols);
 		
-		 br.close();
+		br.close();
 		     
-		 return values;
+		return values;
 	 }
 
 

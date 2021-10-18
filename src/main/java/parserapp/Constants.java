@@ -6,9 +6,9 @@ public final class Constants {
     
     public static String FILE_PATH="./src/files/";
 
-    public static int ROW_FORMAT = 1;
+    public static int ROW_ORIENTATION = 1;
 
-    public static int COLUMN_FORMAT = 2;
+    public static int COLUMN_ORIENTATION = 2; 
     
 }
     
