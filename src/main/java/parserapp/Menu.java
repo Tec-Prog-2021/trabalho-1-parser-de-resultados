@@ -1,12 +1,17 @@
 package parserapp;
 
 import java.io.File;
+import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.Color;
 import java.awt.event.*;
+
+import parserapp.Constants;
+import parserapp.FileParser;
 
 public class Menu extends JFrame implements ActionListener {
     private Container c;
@@ -18,7 +23,7 @@ public class Menu extends JFrame implements ActionListener {
     private JRadioButton linha;
     private JRadioButton coluna;
     public String opDelimitador;
-	public String linha_coluna;
+	public int orientation; // linha / coluna
 	
 	public Menu() {
 			setTitle("Janela Menu");
@@ -26,7 +31,7 @@ public class Menu extends JFrame implements ActionListener {
 	        setDefaultCloseOperation(EXIT_ON_CLOSE);
 	        setResizable(true);
 	        c = getContentPane();
-	        c.setBackground(Color.pink); //Outubro Rosa
+	        c.setBackground(Color.pink); // Outubro Rosa
 	        c.setLayout(null);
 	 
 	        title = new JLabel("Menu");
@@ -84,9 +89,9 @@ public class Menu extends JFrame implements ActionListener {
 			
 			if (linha.isSelected()) {
 		        coluna.setSelected(false);
-		        linha_coluna = "Linha";
+				orientation = Constants.ROW_ORIENTATION;
 			} else {
-            	linha_coluna = "Coluna";
+				orientation = Constants.COLUMN_ORIENTATION;
                 linha.setSelected(false);
             }
 			try {
@@ -96,7 +101,15 @@ public class Menu extends JFrame implements ActionListener {
 				}
 				retornoDelimitador();
 				retornoOrientacao();
-				System.out.println("Opção: " + linha_coluna + " Delimitador: " + opDelimitador);
+
+				FileParser parser = new FileParser();
+				Character delimiter = opDelimitador.charAt(0);
+				try {
+					parser.parse(Constants.FILE_PATH + "analysisMemory.out", Constants.FILE_PATH + "analysisMemoryTab.out", delimiter, orientation);
+					parser.parse(Constants.FILE_PATH + "analysisTime.out", Constants.FILE_PATH + "analysisTimeTab.out", delimiter, orientation);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
             }
 		
 		else if (e.getSource() == reset) {
@@ -125,8 +138,8 @@ public class Menu extends JFrame implements ActionListener {
 		return opDelimitador;
 	}	
 
-	public String retornoOrientacao() {
-		return linha_coluna;
+	public int retornoOrientacao() {
+		return orientation;
 	}
 	
 	public class DelimitadorInvalidoException extends Exception {
