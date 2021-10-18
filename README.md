@@ -33,3 +33,5 @@ Para rodar os testes:
 ```
 $ mvn test
 ```
+
+Os arquivos de saída estarão localizados em: "./src/files"

@@ -11,6 +11,8 @@ import parserapp.FileParser;
 
 import parserapp.Constants;
 
+import exceptions.EscritaNaoPermitidaException;
+
 public class FileParserTest {
 
     private FileParser parser;
@@ -23,7 +25,7 @@ public class FileParserTest {
     }
     
     @Test
-    public void testParser1() throws IOException {
+    public void testParser1() throws EscritaNaoPermitidaException {
         String inputPath = TEST_FILES_PATH + "inputTest1.out";
         String outputPath = TEST_FILES_PATH + "outputTest1.out";
         String expectedPath = TEST_FILES_PATH + "expectedTest1.out";
@@ -34,7 +36,7 @@ public class FileParserTest {
     } 
 
     @Test
-    public void testParser2() throws IOException {
+    public void testParser2() throws EscritaNaoPermitidaException {
         String inputPath = TEST_FILES_PATH + "inputTest2.out";
         String outputPath = TEST_FILES_PATH + "outputTest2.out";
         String expectedPath = TEST_FILES_PATH + "expectedTest2.out";
@@ -45,7 +47,7 @@ public class FileParserTest {
     } 
 
     @Test
-    public void testParser3() throws IOException {
+    public void testParser3() throws EscritaNaoPermitidaException {
         String inputPath = TEST_FILES_PATH + "inputTest3.out";
         String outputPath = TEST_FILES_PATH + "outputTest3.out";
         String expectedPath = TEST_FILES_PATH + "expectedTest3.out";
