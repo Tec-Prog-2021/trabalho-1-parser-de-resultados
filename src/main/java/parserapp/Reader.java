@@ -1,5 +1,4 @@
-package application;
-
+package parserapp;
 
 import java.io.*;
 
@@ -14,7 +13,7 @@ public class Reader {
 
 	public File openFile() throws IOException
 	{
-		return new File("../parser/src/files/" + path);
+		return new File(path);
 	}
 	
 	public float[][] readFile() throws IOException

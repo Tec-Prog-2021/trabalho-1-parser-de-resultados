@@ -1,6 +1,4 @@
-package application;
-
-import application.Reader;
+package parserapp;
 
 public class Main {
 
