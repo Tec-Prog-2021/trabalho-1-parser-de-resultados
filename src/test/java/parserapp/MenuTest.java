@@ -1,25 +1,24 @@
-package interfaceUsuario;
+package parserapp;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.*;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
-import interfaceUsuario.CamposMenu;
-import interfaceUsuario.CamposMenu.DelimitadorInvalidoException;
 
-public class Testes {
-	private CamposMenu menu;
+import parserapp.Menu.DelimitadorInvalidoException;
+
+public class MenuTest {
+	private Menu menu;
 	
 	@Before
 	public void setup() {
-		menu = new CamposMenu();
+		menu = new Menu();
 	}
-	 
 	 
 	@Test
     public void testeDelimitadorInvalido() throws DelimitadorInvalidoException {
-		CamposMenu testando = new CamposMenu();
+		Menu testando = new Menu();
 		
 		Exception exception = assertThrows(DelimitadorInvalidoException.class, () -> {
 	        testando.ValidacaoDelimitador("stringInvalida");
@@ -27,21 +26,16 @@ public class Testes {
 
 	    String expectedMessage = "Inválido";
 	    String actualMessage = exception.getMessage();
-	    //System.out.println(actualMessage.contains(expectedMessage));
-	    Assert.assertTrue(actualMessage.contains(expectedMessage));
-		//equals(calc.Teste("sdfasd"));
+	    assertTrue(actualMessage.contains(expectedMessage));
     }
 	
 	@Test
     public void testeDelimitadorValido() throws DelimitadorInvalidoException {
-		CamposMenu testando = new CamposMenu();
+		Menu testando = new Menu();
 		
 		String delimitador = "\n";
 		testando.ValidacaoDelimitador(delimitador);
 	   
-	    Assert.assertEquals(delimitador, testando.ValidacaoDelimitador(delimitador));
+	    assertEquals(delimitador, testando.ValidacaoDelimitador(delimitador));
     }
-
-	
-	
 }

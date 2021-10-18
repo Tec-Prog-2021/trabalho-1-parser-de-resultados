@@ -1,17 +1,14 @@
-package interfaceUsuario;
+package parserapp;
+
+import java.io.File;
 import javax.imageio.ImageIO;
-import org.junit.*;
 import javax.swing.*;
-import org.junit.Assert.*;
-
-
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import java.awt.Color;
 import java.awt.event.*;
-import org.junit.Assert.*;
-public class CamposMenu extends JFrame implements ActionListener {
+
+public class Menu extends JFrame implements ActionListener {
     private Container c;
     private JLabel title;
     private JLabel delimitador;
@@ -23,9 +20,7 @@ public class CamposMenu extends JFrame implements ActionListener {
     public String opDelimitador;
 	public String linha_coluna;
 	
-
-
-	public CamposMenu() {
+	public Menu() {
 			setTitle("Janela Menu");
 	        setBounds(150, 45, 450, 300);
 	        setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -34,15 +29,11 @@ public class CamposMenu extends JFrame implements ActionListener {
 	        c.setBackground(Color.pink); //Outubro Rosa
 	        c.setLayout(null);
 	 
-	       
-	        
 	        title = new JLabel("Menu");
 	        title.setFont(new Font("Arial", Font.PLAIN, 18));
 	        title.setSize(80, 50);
 	        title.setLocation(200, 5);
 	        c.add(title);
-	        
-	       
 	 
 	        delimitador = new JLabel("Delimitador");
 	        delimitador.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -70,7 +61,6 @@ public class CamposMenu extends JFrame implements ActionListener {
 	        coluna.setLocation(90, 90);
 	        c.add(coluna);
 	        setVisible(true);
-	        
 
 	        sub = new JButton("Submit");
 	        sub.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -87,54 +77,39 @@ public class CamposMenu extends JFrame implements ActionListener {
 	        c.add(reset);
 	}
 	
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		//throws DelimitadorInvalidoException;
-		// TODO Auto-generated method stub
 		if(e.getSource() == sub) {
-			//System.out.println(tdelimitador.getText());
 			opDelimitador = tdelimitador.getText();
 			
 			if (linha.isSelected()) {
 		        coluna.setSelected(false);
 		        linha_coluna = "Linha";
-			}
-                // System.out.println("Linha");}
-             else {
-            	 linha_coluna = "Coluna";
-                 linha.setSelected(false);
-                 }
-            	 //System.out.println("Coluna");
-				
+			} else {
+            	linha_coluna = "Coluna";
+                linha.setSelected(false);
+            }
 			try {
 					ValidacaoDelimitador(opDelimitador);
 				} catch (DelimitadorInvalidoException e1) {
-					// TODO Auto-generated catch block
-					//System.out.println("sadf");
 					e1.printStackTrace();
 				}
 				retornoDelimitador();
 				retornoOrientacao();
 				System.out.println("Opção: " + linha_coluna + " Delimitador: " + opDelimitador);
-             }
+            }
 		
 		else if (e.getSource() == reset) {
             String def = "";
             tdelimitador.setText(def);
             coluna.setSelected(false);
             linha.setSelected(false);
-
         }
 	}
 
 	public String ValidacaoDelimitador(String delimitador_informado) throws DelimitadorInvalidoException{
-		//System.out.println("Ate aqui nos ajudou o Senhor");
-		//System.out.println(delimitador_informado);
 		if (delimitador_informado == "")
 			throw new DelimitadorInvalidoException("Delimitador Inválido", null);
-
 			
 		if(delimitador_informado.charAt(0) == '\\'){
 			delimitador_informado = delimitador_informado.substring(1, delimitador_informado.length());
@@ -146,18 +121,14 @@ public class CamposMenu extends JFrame implements ActionListener {
 		return delimitador_informado;
 	}
 
-	
-	
 	public String retornoDelimitador() {
 		return opDelimitador;
-	}
-	
+	}	
 
 	public String retornoOrientacao() {
 		return linha_coluna;
 	}
 	
-
 	public class DelimitadorInvalidoException extends Exception {
 		public DelimitadorInvalidoException(String errorMessage, Throwable err) {
 			super(errorMessage, err);
