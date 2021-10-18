@@ -32,7 +32,6 @@ public class ReaderTest {
 			
 			assertTrue(e.getMessage().contains(expectetedException));
 		}
-	
 		
 	} 
 	
@@ -42,7 +41,7 @@ public class ReaderTest {
 	
 		reader.readFile();
 		
-		assertEquals(20, reader.getRowSize());
+		assertEquals(21, reader.getRowSize());
 
 	}
 	
@@ -62,7 +61,7 @@ public class ReaderTest {
 	
 		reader.readFile();
 		
-		assertEquals(20, reader.getRowSize());
+		assertEquals(21, reader.getRowSize());
 
 	}
 	
