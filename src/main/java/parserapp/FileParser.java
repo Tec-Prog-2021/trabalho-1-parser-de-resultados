@@ -28,9 +28,8 @@ public class FileParser {
 
       String content = transformer.transform(orientation, delimiter);
 
-      FileWriter writer = new FileWriter(outputFile);
-      writer.write(content);
-      writer.close();
+      Writer writer = new Writer(outputFile);
+      writer.writeFile(content);
     } catch (Exception e) {
       throw new EscritaNaoPermitidaException();
     }
