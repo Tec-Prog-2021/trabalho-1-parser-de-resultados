@@ -1,6 +1,6 @@
 package parserapp;
 
-import exceptions.EscritaNaoPermitidaException;
+import exceptions.*;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -28,12 +28,36 @@ public class FileParser {
 
       String content = transformer.transform(orientation, delimiter);
 
-      FileWriter writer = new FileWriter(outputFile);
-      writer.write(content);
-      writer.close();
+      this.writeFile(outputFile, content);
+
     } catch (Exception e) {
       throw new EscritaNaoPermitidaException();
     }
   }
+
+  public FileWriter openFile(String path) throws ArquivoNaoEncontradoException
+	{
+		try {
+
+			return new FileWriter(path);
+		
+		} catch(Exception e) {
+		
+			throw new ArquivoNaoEncontradoException();
+		
+		}
+	}
+	
+	public void writeFile(String path, String content) throws EscritaNaoPermitidaException {
+		try {
+
+			FileWriter writer = this.openFile(path);
+			writer.write(content);
+			writer.close();
+			
+		} catch(Exception e) {
+			throw new EscritaNaoPermitidaException();
+		}	
+	}
   
 }
