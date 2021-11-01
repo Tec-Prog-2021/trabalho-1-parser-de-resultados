@@ -1,8 +1,7 @@
 package parserapp;
 
-import exceptions.EscritaNaoPermitidaException;
-import java.io.FileWriter;
 import java.io.IOException;
+import exceptions.EscritaNaoPermitidaException;
 
 public class FileParser {
 
@@ -52,34 +51,7 @@ public class FileParser {
         
         }
         
-  public void parse(
-    String inputFile,
-    String outputFile,
-    Character delimiter,
-    int orientation
-  )
-    throws EscritaNaoPermitidaException {
-    try {
-      Reader reader = new Reader(inputFile);
-
-      String values[][] = reader.readFile();
-      int rows = reader.getRowSize();
-      int cols = reader.getColSize();
-
-      OrientationTransformer transformer = new OrientationTransformer(
-        values,
-        rows,
-        cols
-      );
-
-      String content = transformer.transform(orientation, delimiter);
-
-      FileWriter writer = new FileWriter(outputFile);
-      writer.write(content);
-      writer.close();
-    } catch (Exception e) {
-      throw new EscritaNaoPermitidaException();
     }
   }
   
-}
+
