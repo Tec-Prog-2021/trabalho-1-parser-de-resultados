@@ -6,19 +6,19 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 
-import parserapp.Reader;
+import parserapp.Persistencia;
 
 import parserapp.Constants;
 
 import exceptions.ArquivoNaoEncontradoException;
 
-public class ReaderTest {
+public class PersistenciaTest {
 
  	@Test
 	public void testOpenFileSuccess() throws ArquivoNaoEncontradoException {
-	 	Reader reader = new Reader(Constants.FILE_PATH + "analysisMemory.out");
+	 	Persistencia persistencia = new Persistencia();
 		 
-		File f = reader.openFile();
+		File f = persistencia.openFile(Constants.FILE_PATH + "analysisMemory.out");
 		assertTrue(f.getAbsoluteFile().toString().contains("analysisMemory.out"));
 	}
 	
@@ -26,9 +26,9 @@ public class ReaderTest {
 	public void testOpenFileFail() throws ArquivoNaoEncontradoException {
 		
 		try {
-			Reader reader = new Reader(Constants.FILE_PATH + "analysisMemory.out");
+			Persistencia persistencia = new Persistencia();
 			
-			reader.openFile();
+			persistencia.openFile(Constants.FILE_PATH + "analysisMemory.out");
 		} catch (Exception e) {
 			String expectetedException = "No such file or directory";
 			
@@ -39,41 +39,41 @@ public class ReaderTest {
 	
  	@Test
 	public void testMemoryRowSize() throws ArquivoNaoEncontradoException {
-		Reader reader = new Reader(Constants.FILE_PATH + "analysisMemory.out");
+		Persistencia persistencia = new Persistencia();
 	
-		reader.readFile();
+		persistencia.readFile(Constants.FILE_PATH + "analysisMemory.out");
 		
-		assertEquals(21, reader.getRowSize());
+		assertEquals(21, persistencia.getRowSize());
 
 	}
 	
 	@Test
 	public void testMemoryColSize() throws ArquivoNaoEncontradoException {
-		Reader reader = new Reader(Constants.FILE_PATH + "analysisMemory.out");
+		Persistencia persistencia = new Persistencia();
 	
-		reader.readFile();
+		persistencia.readFile(Constants.FILE_PATH + "analysisMemory.out");
 		
-		assertEquals(11, reader.getColSize());
+		assertEquals(11, persistencia.getColSize());
 
 	}
 	
 	@Test
 	public void testTimeRowSize() throws ArquivoNaoEncontradoException {
-		Reader reader = new Reader(Constants.FILE_PATH + "analysisTime.out");
+		Persistencia persistencia = new Persistencia();
 	
-		reader.readFile();
+		persistencia.readFile(Constants.FILE_PATH + "analysisMemory.out");
 		
-		assertEquals(21, reader.getRowSize());
+		assertEquals(21, persistencia.getRowSize());
 
 	}
 	
 	@Test
 	public void testTimeColSize() throws ArquivoNaoEncontradoException {
-		Reader reader = new Reader(Constants.FILE_PATH + "analysisTime.out");
+		Persistencia persistencia = new Persistencia();
 	
-		reader.readFile();
+		persistencia.readFile(Constants.FILE_PATH + "analysisMemory.out");
 		
-		assertEquals(11, reader.getColSize());
+		assertEquals(11, persistencia.getColSize());
 
 	}  
 }

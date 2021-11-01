@@ -2,19 +2,18 @@ package parserapp;
 
 import java.io.*;
 import java.util.Arrays;
+import java.io.FileWriter;
 
 import exceptions.ArquivoNaoEncontradoException;
+import exceptions.EscritaNaoPermitidaException;
 
-public class Reader {
-	private String path;
+public class Persistencia {
 	private int rowSize;
 	private int colSize;
 	
-	public Reader(String path) {
-		this.path = path;
-	}
+	public Persistencia() {}
 
-	public File openFile() throws ArquivoNaoEncontradoException
+	public File openFile(String path) throws ArquivoNaoEncontradoException
 	{
 		try {
 
@@ -27,11 +26,11 @@ public class Reader {
 		}
 	}
 	
-	public String[][] readFile() throws ArquivoNaoEncontradoException
+	public String[][] readFile(String path) throws ArquivoNaoEncontradoException
 	{
 		try {
 
-			File file = openFile();
+			File file = openFile(path);
 		
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			
@@ -67,8 +66,19 @@ public class Reader {
 			throw new ArquivoNaoEncontradoException();
 		}
 	
-	 }
+	}
 
+	public void writeFile(String outputFile, String content) throws EscritaNaoPermitidaException{
+		
+		try{
+			FileWriter writer = new FileWriter(outputFile);
+        	writer.write(content);
+        	writer.close();
+
+		} catch(Exception e){
+				throw new EscritaNaoPermitidaException();
+			}
+	}
 
 	public int getRowSize() {
 		return rowSize;
