@@ -12,6 +12,7 @@ import parserapp.FileParser;
 import parserapp.Constants;
 
 import exceptions.EscritaNaoPermitidaException;
+import exceptions.ArquivoNaoEncontradoException;
 
 public class FileParserTest {
 
@@ -25,7 +26,7 @@ public class FileParserTest {
     }
     
     @Test
-    public void testParser1() throws EscritaNaoPermitidaException {
+    public void testParser1() throws ArquivoNaoEncontradoException, EscritaNaoPermitidaException {
         String inputPath = TEST_FILES_PATH + "inputTest1.out";
         String outputPath = TEST_FILES_PATH + "outputTest1.out";
         String expectedPath = TEST_FILES_PATH + "expectedTest1.out";
@@ -36,7 +37,7 @@ public class FileParserTest {
     } 
 
     @Test
-    public void testParser2() throws EscritaNaoPermitidaException {
+    public void testParser2() throws ArquivoNaoEncontradoException, EscritaNaoPermitidaException {
         String inputPath = TEST_FILES_PATH + "inputTest2.out";
         String outputPath = TEST_FILES_PATH + "outputTest2.out";
         String expectedPath = TEST_FILES_PATH + "expectedTest2.out";
@@ -47,7 +48,7 @@ public class FileParserTest {
     } 
 
     @Test
-    public void testParser3() throws EscritaNaoPermitidaException {
+    public void testParser3() throws ArquivoNaoEncontradoException, EscritaNaoPermitidaException {
         String inputPath = TEST_FILES_PATH + "inputTest3.out";
         String outputPath = TEST_FILES_PATH + "outputTest3.out";
         String expectedPath = TEST_FILES_PATH + "expectedTest3.out";

@@ -2,36 +2,37 @@ package parserapp;
 
 import java.io.*;
 import java.util.Arrays;
+import java.io.FileWriter;
 
 import exceptions.ArquivoNaoEncontradoException;
+import exceptions.EscritaNaoPermitidaException;
 
-public class Reader {
-	private String path;
+public class Persistencia {
 	private int rowSize;
 	private int colSize;
 	
-	public Reader(String path) {
-		this.path = path;
-	}
+	public Persistencia() {}
 
-	public File openFile() throws ArquivoNaoEncontradoException
-	{
+	public File openFileToRead(String path) throws ArquivoNaoEncontradoException {
 		try {
-
 			return new File(path);
-		
 		} catch(Exception e) {
-		
 			throw new ArquivoNaoEncontradoException();
-		
 		}
 	}
 	
-	public String[][] readFile() throws ArquivoNaoEncontradoException
-	{
+	public FileWriter openFileToWrite(String path) throws ArquivoNaoEncontradoException {
+		try {
+			return new FileWriter(path);
+		} catch(Exception e) {
+			throw new ArquivoNaoEncontradoException();
+		}
+	}
+
+	public String[][] readFile(String path) throws ArquivoNaoEncontradoException {
 		try {
 
-			File file = openFile();
+			File file = openFileToRead(path);
 		
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			
@@ -67,23 +68,29 @@ public class Reader {
 			throw new ArquivoNaoEncontradoException();
 		}
 	
-	 }
+	}
 
+	public void writeFile(String path, String content) throws EscritaNaoPermitidaException {
+		try {
+			FileWriter writer = openFileToWrite(path);
+			writer.write(content);
+			writer.close();		
+		} catch(Exception e) {
+			throw new EscritaNaoPermitidaException();
+		}
+	}	
 
 	public int getRowSize() {
 		return rowSize;
 	}
 
-
 	public void setRowSize(int rowSize) {
 		this.rowSize = rowSize;
 	}
 
-
 	public int getColSize() {
 		return colSize;
 	}
-
 
 	public void setColSize(int colSize) {
 		this.colSize = colSize;
