@@ -18,7 +18,7 @@ public class PersistenciaTest {
 	public void testOpenFileSuccess() throws ArquivoNaoEncontradoException {
 	 	Persistencia persistencia = new Persistencia();
 		 
-		File f = persistencia.openFile(Constants.FILE_PATH + "analysisMemory.out");
+		File f = persistencia.openFileToRead(Constants.FILE_PATH + "analysisMemory.out");
 		assertTrue(f.getAbsoluteFile().toString().contains("analysisMemory.out"));
 	}
 	
@@ -28,7 +28,7 @@ public class PersistenciaTest {
 		try {
 			Persistencia persistencia = new Persistencia();
 			
-			persistencia.openFile(Constants.FILE_PATH + "analysisMemory.out");
+			persistencia.openFileToRead(Constants.FILE_PATH + "analysisMemory.out");
 		} catch (Exception e) {
 			String expectetedException = "No such file or directory";
 			
